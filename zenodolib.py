@@ -152,7 +152,8 @@ class ZenodoHandler:
         r = self.deposition_retrieve(deposition_id)
         bucket_url = r.json()['links']['bucket']
         url = "{}/{}".format(bucket_url, target_name)
-        data = {'file': open(file_path, 'rb')}
+        # data = {'file': open(file_path, 'rb')} # old API
+        data = open(file_path, 'rb')   # new API
         headers = {"Accept": "application/json",
                    "Content-Type": "application/octet-stream"}
         return self.session.put(url, data=data, headers=headers)
